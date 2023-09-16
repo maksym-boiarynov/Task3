@@ -26,7 +26,8 @@ namespace Task3_2nd_term
     }
     enum GenderType
     {
-        Male = 1,
-        Female = 2
+        Male,male = 1,
+        Female,female = 2,
+        Not_mentioned = 3,
     }
 }
