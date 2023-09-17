@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Task3_2nd_term
@@ -33,14 +35,19 @@ namespace Task3_2nd_term
                         Console.WriteLine("Incorrect format of data. Use 1 for Male, 2 for Female or 3 for no gender");
                     }
                 }
-
                 else
                 {
                     Console.WriteLine("Incorrect format of data.");
                 }
             }
-            Console.WriteLine("Info about person:");
-            Console.WriteLine($"Name: {user1.FirstName}, Surname: {user1.LastName}, Age: {user1.Age}, Gender: {user1.Gender}");
+            if (user1.Age <= 10)
+            {
+                Console.WriteLine($"Hi, my name is: {user1.FirstName} and last name {user1.LastName}. I am a baby. I am {user1.Gender}.");
+            }
+            else 
+            {
+                Console.WriteLine($"Hi, my name is: {user1.FirstName} and last name {user1.LastName}. I am {user1.Age} years old. I am {user1.Gender}.");
+            }
         }
         static string NoNumbers()
         {

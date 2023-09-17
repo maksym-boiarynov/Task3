@@ -17,7 +17,7 @@ namespace Task3_2nd_term
 
         public User()
         {
-            Age = 21;
+            Age = 22;
         }
 
         public User(int age)
