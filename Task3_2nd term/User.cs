@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Task3_2nd_term
 {
@@ -16,7 +17,7 @@ namespace Task3_2nd_term
 
         public User()
         {
-            Age = 21;
+            Age = 22;
         }
 
         public User(int age)
@@ -26,7 +27,8 @@ namespace Task3_2nd_term
     }
     enum GenderType
     {
-        Male = 1,
-        Female = 2
+        Male,male = 1,
+        Female,female = 2,
+        Not_mentioned = 3,
     }
 }

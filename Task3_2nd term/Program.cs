@@ -1,30 +1,72 @@
 ﻿using System;
-using Task3_2nd_term;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
-class Program
+namespace Task3_2nd_term
 {
-    static void Main(string[] args)
+    class Program
     {
-        User user1 = new User();
-
-        Console.Write("Enter name: ");
-        user1.FirstName = Console.ReadLine();
-
-        Console.Write("Enter surname: ");
-        user1.LastName = Console.ReadLine();
-
-        Console.Write("Enter gender (Where Male is 1 and Female is 2): ");
-        string genderInput = Console.ReadLine();
-        
-        if (Enum.TryParse(genderInput, out GenderType gender))
+        static void Main(string[] args)
         {
-            user1.Gender = gender;
-            Console.WriteLine("Info about person:");
-            Console.WriteLine($"Name: {user1.FirstName}, Surname: {user1.LastName}, Age: {user1.Age}, Gender: {user1.Gender}");
+            User user1 = new User();
+
+            Console.Write("Enter name: ");
+            user1.FirstName = NoNumbers();
+
+            Console.Write("Enter surname: ");
+            user1.LastName = NoNumbers();
+
+            bool isValidGender = false;
+            while (!isValidGender)
+            {
+                Console.Write("Enter gender (Where 1 for Male, 2 for Female or 3 to not mention your gender): ");
+                string genderInput = Console.ReadLine();
+
+                if (Enum.TryParse(genderInput, out GenderType gender))
+                {
+                    if (Enum.IsDefined(typeof(GenderType), gender))
+                    {
+                        user1.Gender = gender;
+                        isValidGender = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Incorrect format of data. Use 1 for Male, 2 for Female or 3 for no gender");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect format of data.");
+                }
+            }
+            if (user1.Age <= 10)
+            {
+                Console.WriteLine($"Hi, my name is: {user1.FirstName} and last name {user1.LastName}. I am a baby. I am {user1.Gender}.");
+            }
+            else 
+            {
+                Console.WriteLine($"Hi, my name is: {user1.FirstName} and last name {user1.LastName}. I am {user1.Age} years old. I am {user1.Gender}.");
+            }
         }
-        else
+        static string NoNumbers()
         {
-            Console.WriteLine("Incorrect format of data. Use 1 for Male or 2 for Female.");
+            string user_input;
+            do
+            {
+                user_input = Console.ReadLine();
+                if (!Validator(user_input))
+                {
+                    Console.WriteLine("Error.Name and surname should not contain numbers. Please enter again:");
+                }
+            } while (!Validator(user_input));
+
+            return user_input;
+        }
+
+        static bool Validator(string user_input)
+        {
+            return !Regex.IsMatch(user_input, @"\d");
         }
     }
 }
